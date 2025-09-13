@@ -21,6 +21,7 @@ import { initFiltering } from "./components/filtering.js";
 
 // Исходные данные используемые в render()
 const api = initData(sourceData);
+const { data, indexes } = initData(sourceData);
 /**
  * Сбор и обработка полей из таблицы
  * @returns {Object}
@@ -40,14 +41,10 @@ function collectState() {
  * Перерисовка состояния таблицы при любых изменениях
  * @param {HTMLButtonElement?} action
  */
-// шаг 1 пр7.
+
 async function render(action) {
   let state = collectState(); // состояние полей из таблицы
   let query = {}; // параметры для api
-  // @todo: использование
-  // шаг 0 пр7.
-  // result = applySorting(result, state, action);
-  // result = applyPagination(result, state, action);
   query = applyPagination(query, state, action); // обновляем query
   query = applyFiltering(query, state, action); // обновляем query
   query = applySearching(query, state, action); // обновляем query
@@ -71,14 +68,9 @@ const sampleTable = initTable(
 );
 
 // @todo: инициализация
-const applySearching = initSearching(search.name);
+const applySearching = initSearching("search");
 
-// шаг 0 пр7.
-// const applyFiltering = initFiltering(sampleTable.filter.elements, {    // передаём элементы фильтра
-//     searchBySeller: indexes.sellers                                    // для элемента с именем searchBySeller устанавливаем массив продавцов
-// });
-
-const { applyFiltering, updateIndexes } = initFiltering(sampleTable.filter.ele); // передаём элементы фильтра
+const { applyFiltering, updateIndexes } = initFiltering(sampleTable.filter.elements); // передаём элементы фильтра
 
 const applySorting = initSorting([
   // Нам нужно передать сюда массив элементов, которые вызывают сортировку, чтобы изменять их визуальное представление
