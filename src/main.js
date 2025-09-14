@@ -78,22 +78,7 @@ const applySorting = initSorting([
   sampleTable.header.elements.sortByTotal,
 ]);
 
-// const applyPagination = initPagination(
-//     sampleTable.pagination.elements,
-//     (el, page, isCurrent) => {
-//         const input = el.querySelector('input');
-//         const label = el.querySelector('span');
-//         input.value = page;
-//         input.checked = isCurrent;
-//         label.textContent = page;
-//         return el;
-//     }
-// )
-// вариант в шаге 2 пр7. не работал
-// const { applyPagination, updatePagination } = initPagination(...);
-
-// исправление через доп объявление функции
-const getPagination = initPagination(
+const { applyPagination, updatePagination } = initPagination(
   sampleTable.pagination.elements,
   (el, page, isCurrent) => {
     const input = el.querySelector("input");
@@ -104,7 +89,6 @@ const getPagination = initPagination(
     return el;
   }
 );
-const { applyPagination, updatePagination } = getPagination();
 
 const appRoot = document.querySelector("#app");
 appRoot.appendChild(sampleTable.container);
